@@ -10,12 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Quantidade_Item = $_POST["Quantidade_Item"];
     $Validade = $_POST["Validade"];
 
-    $sql = "INSERT INTO Itens 
-            (name, Categoria, Descricao, Quantidade_Item, Validade)
-            VALUES (?, ?, ?, ?, ?)";
-
+    $sql = "INSERT INTO Itens (name, Categoria, Descricao, Quantidade_Item, Validade) VALUES (?, ?, ?, ?, ?)";
+    
     $stmt = $conexao->prepare($sql);
-
     $stmt->bind_param(
         "sssis",
         $name,
@@ -26,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     $stmt->execute();
-
     $stmt->close();
 }
 
@@ -38,11 +34,8 @@ $Itens = $conexao->query("SELECT * FROM Itens");
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <title>Estoque de Itens</title>
-
 </head>
 
 <body>
@@ -50,30 +43,18 @@ $Itens = $conexao->query("SELECT * FROM Itens");
     <h1>Cadastrar Item</h1>
 
     <form method="POST">
-
         <label>Nome:</label>
-        <br>
-
-        <input type="text" name="name" required>
-
+            <input type="text" name="name" required>
         <br><br>
-
-
         <label>Categoria:</label>
         <br>
-
         <select name="Categoria" required>
 
             <option value="">Selecione</option>
-
             <option value="Legumes">Legumes</option>
-
             <option value="Bebidas">Bebidas</option>
-
             <option value="Fruta">Fruta</option>
-
             <option value="Carne">Carne</option>
-
             <option value="limpeza">Limpeza</option>
 
         </select>
@@ -88,57 +69,29 @@ $Itens = $conexao->query("SELECT * FROM Itens");
 
         <br><br>
 
-
         <label>Quantidade:</label>
         <br>
-
-        <input 
-            type="number" 
-            name="Quantidade_Item" 
-            required
-        >
-
+            <input type="number" name="Quantidade_Item" required>
         <br><br>
-
-
         <label>Validade:</label>
         <br>
-
-        <input 
-            type="date" 
-            name="Validade" 
-            required
-        >
-
+            <input type="date" name="Validade" required>
         <br><br>
-
-
-        <input 
-            type="submit" 
-            value="Cadastrar Item"
-        >
-
+            <input type="submit" value="Cadastrar Item">
     </form>
-
 
     <h2>Itens Cadastrados</h2>
 
     <table border="1">
 
         <tr>
-
             <th>ID</th>
-
             <th>Nome</th>
-
             <th>Categoria</th>
-
             <th>Descrição</th>
-
             <th>Quantidade</th>
-
             <th>Validade</th>
-
+            <th>Ações</th>
         </tr>
 
 
@@ -146,28 +99,16 @@ $Itens = $conexao->query("SELECT * FROM Itens");
 
             <tr>
 
-                <td>
-                    <?php echo $item["id"]; ?>
-                </td>
+                <td><?php echo $item["id"]; ?></td>
+                <td><?php echo $item["name"]; ?></td>
+                <td><?php echo $item["Categoria"]; ?></td>
+                <td><?php echo $item["Descricao"]; ?></td>
+                <td><?php echo $item["Quantidade_Item"]; ?></td>
+                <td><?php echo $item["Validade"]; ?></td>
 
                 <td>
-                    <?php echo $item["name"]; ?>
-                </td>
-
-                <td>
-                    <?php echo $item["Categoria"]; ?>
-                </td>
-
-                <td>
-                    <?php echo $item["Descricao"]; ?>
-                </td>
-
-                <td>
-                    <?php echo $item["Quantidade_Item"]; ?>
-                </td>
-
-                <td>
-                    <?php echo $item["Validade"]; ?>
+                    <a href="public/editar.php?id=<?php echo $item["id"]; ?>">Editar</a>
+                    <a href="public/excluir.php?id=<?php echo $item["id"]; ?>">Excluir</a>
                 </td>
 
             </tr>
