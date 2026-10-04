@@ -13,10 +13,11 @@
             <label for="Categoria">Categoria</label>
                 <select name="Categoria" required>
                     <option value="">Selecione</option>
-                    <option value="Alimento">Alimentos</option>
-                    <option value="Refrigerante">Refrigerante</option>
+                    <option value="Legumes">Legumes</option>
+                    <option value="Bebidas">Bebidas</option>
                     <option value="Fruta">Frutas</option>
                     <option value="Carne">Carnes</option>
+                    <option value="limpeza">Produto de Limpeza</option>
                 </select>
                 <br> <br>
                 Descrição: <br>
@@ -41,7 +42,7 @@
                 <th>Id</th>
                 <th>Nome</th>
                 <Th>Categoria</Th>
-                <th>Refrigerantes</th>
+                <th>Bebidas</th>
                 <th>Valor</th>
                 <th>Quantidade</th>
                 <th>Validade</th>
