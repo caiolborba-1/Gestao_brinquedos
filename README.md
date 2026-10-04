@@ -1,5 +1,5 @@
 Caso de uso:
-![alt text](<img/Captura de tela 2026-10-04 171312.png>)
+![alt text](<img/Captura de tela 2026-10-04 182025.png>)
 ---------------------------------------------------------------------------------------
 
 Sistema de Gerenciamento de Estoque
