@@ -10,8 +10,8 @@
             <label type="name">Nome:</label> <br>
                 <input type="text" name="name" required>
                 <br> <br>
-            <label for="Item">Tipo de Item </label>
-                <select name="Item" required>
+            <label for="Categoria">Categoria</label>
+                <select name="Categoria" required>
                     <option value="">Selecione</option>
                     <option value="Alimento">Alimentos</option>
                     <option value="Refrigerante">Refrigerante</option>
@@ -25,14 +25,31 @@
                 <label for="Valor">Valor</label> <br>
                     <input type="float" name="Valor" required>
                 <br>
-                <label for="Quantidade_Item">Quantidade do Item:</label> <br>
+                <label for="Quantidade_Item">Quantidade:</label> <br>
                     <input type="number" name="Quantidade_Item" required>
                     <br>
                 <label for="Validade_Item">Validade do Item</label> <br>
                     <input type="date" name="Validade_Item" required>
                 <br> <br>
                 <input type="submit" value="Cadastrar Item"> 
-
         </form>
+
+<h2>Itens Cadastrados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <Th>Categoria</Th>
+                <th>Refrigerantes</th>
+                <th>Valor</th>
+                <th>Quantidade</th>
+                <th>Validade</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
 </body>
 </html>
