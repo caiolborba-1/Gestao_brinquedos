@@ -1,8 +1,15 @@
 <?php
+
 $host = "localhost";
 $usuario = "root";
 $senha = "";
 $banco = "Estoque_Itens";
 
-$conexao = new mysqli($host, $usuario, $senha, $banco); 
-?>
+$conexao = new mysqli($host, $usuario, $senha, $banco);
+
+if ($conexao->connect_error) {
+    die("Erro na conexão: " . $conexao->connect_error);
+}
+
+?>]
+

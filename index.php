@@ -1,89 +1,181 @@
 <?php
+
 include "infra/conexao.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $name = $_POST["name"];
     $Categoria = $_POST["Categoria"];
-    $Descrição = $_POST["Descrição"];
-    $Valor = $_POST["Valor"];
-    $Quantidade = $_POST["Quantidade"];
+    $Descricao = $_POST["Descricao"];
+    $Quantidade_Item = $_POST["Quantidade_Item"];
     $Validade = $_POST["Validade"];
 
     $sql = "INSERT INTO Itens 
-    (name, Categoria, Descrição, Valor, Quantidade, Validade) 
-    VALUES (?, ?, ?, ?, ?, ?)";
+            (name, Categoria, Descricao, Quantidade_Item, Validade)
+            VALUES (?, ?, ?, ?, ?)";
 
     $stmt = $conexao->prepare($sql);
 
     $stmt->bind_param(
-        "sssdis",
+        "sssis",
         $name,
         $Categoria,
-        $Descrição,
-        $Valor,
-        $Quantidade,
+        $Descricao,
+        $Quantidade_Item,
         $Validade
     );
+
+    $stmt->execute();
 
     $stmt->close();
 }
 
 $Itens = $conexao->query("SELECT * FROM Itens");
+
 ?>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estoque de Produtos</title>
-</head>
-<body>
-    <h1>Cadastrar Item</h1>
-        <form action="" method="POST">
-            <label type="name">Nome:</label> <br>
-                <input type="text" name="name" required>
-                <br> <br>
-            <label for="Categoria">Categoria</label>
-                <select name="Categoria" required>
-                    <option value="">Selecione</option>
-                    <option value="Legumes">Legumes</option>
-                    <option value="Bebidas">Bebidas</option>
-                    <option value="Fruta">Frutas</option>
-                    <option value="Carne">Carnes</option>
-                    <option value="limpeza">Produto de Limpeza</option>
-                </select>
-                <br> <br>
-                Descrição: <br>
-                <textarea name="Descrição"></textarea>
-                <br>
-                <label for="Valor">Valor</label> <br>
-                    <input type="float" name="Valor" required>
-                <br>
-                <label for="Quantidade_Item">Quantidade:</label> <br>
-                    <input type="number" name="Quantidade_Item" required>
-                    <br>
-                <label for="Validade_Item">Validade do Item</label> <br>
-                    <input type="date" name="Validade_Item" required>
-                <br> <br>
-                <input type="submit" value="Cadastrar Item"> 
-        </form>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-<h2>Itens Cadastrados</h2>
-    <table>
-        <thead>
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Estoque de Itens</title>
+
+</head>
+
+<body>
+
+    <h1>Cadastrar Item</h1>
+
+    <form method="POST">
+
+        <label>Nome:</label>
+        <br>
+
+        <input type="text" name="name" required>
+
+        <br><br>
+
+
+        <label>Categoria:</label>
+        <br>
+
+        <select name="Categoria" required>
+
+            <option value="">Selecione</option>
+
+            <option value="Legumes">Legumes</option>
+
+            <option value="Bebidas">Bebidas</option>
+
+            <option value="Fruta">Fruta</option>
+
+            <option value="Carne">Carne</option>
+
+            <option value="limpeza">Limpeza</option>
+
+        </select>
+
+        <br><br>
+
+
+        <label>Descrição:</label>
+        <br>
+
+        <textarea name="Descricao" required></textarea>
+
+        <br><br>
+
+
+        <label>Quantidade:</label>
+        <br>
+
+        <input 
+            type="number" 
+            name="Quantidade_Item" 
+            required
+        >
+
+        <br><br>
+
+
+        <label>Validade:</label>
+        <br>
+
+        <input 
+            type="date" 
+            name="Validade" 
+            required
+        >
+
+        <br><br>
+
+
+        <input 
+            type="submit" 
+            value="Cadastrar Item"
+        >
+
+    </form>
+
+
+    <h2>Itens Cadastrados</h2>
+
+    <table border="1">
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Nome</th>
+
+            <th>Categoria</th>
+
+            <th>Descrição</th>
+
+            <th>Quantidade</th>
+
+            <th>Validade</th>
+
+        </tr>
+
+
+        <?php while ($item = mysqli_fetch_assoc($Itens)) { ?>
+
             <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <Th>Categoria</Th>
-                <th>Bebidas</th>
-                <th>Valor</th>
-                <th>Quantidade</th>
-                <th>Validade</th>
+
+                <td>
+                    <?php echo $item["id"]; ?>
+                </td>
+
+                <td>
+                    <?php echo $item["name"]; ?>
+                </td>
+
+                <td>
+                    <?php echo $item["Categoria"]; ?>
+                </td>
+
+                <td>
+                    <?php echo $item["Descricao"]; ?>
+                </td>
+
+                <td>
+                    <?php echo $item["Quantidade_Item"]; ?>
+                </td>
+
+                <td>
+                    <?php echo $item["Validade"]; ?>
+                </td>
+
             </tr>
-        </thead>
-        <tbody>
-            
-        </tbody>
+
+        <?php } ?>
+
     </table>
+
 </body>
+
 </html>
