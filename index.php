@@ -1,3 +1,36 @@
+<?php
+include "infra/conexao.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name = $_POST["name"];
+    $Categoria = $_POST["Categoria"];
+    $Descrição = $_POST["Descrição"];
+    $Valor = $_POST["Valor"];
+    $Quantidade = $_POST["Quantidade"];
+    $Validade = $_POST["Validade"];
+
+    $sql = "INSERT INTO Itens 
+    (name, Categoria, Descrição, Valor, Quantidade, Validade) 
+    VALUES (?, ?, ?, ?, ?, ?)";
+
+    $stmt = $conexao->prepare($sql);
+
+    $stmt->bind_param(
+        "sssdis",
+        $name,
+        $Categoria,
+        $Descrição,
+        $Valor,
+        $Quantidade,
+        $Validade
+    );
+
+    $stmt->close();
+}
+
+$Itens = $conexao->query("SELECT * FROM Itens");
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
